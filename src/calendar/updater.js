@@ -1,6 +1,13 @@
 import {parseDate} from '../interface';
 
 export default function shouldComponentUpdate(nextProps, nextState) {
+  if (nextProps.isMultiSelect) {
+    const [prevStartDate, prevEndDate] = [parseDate(this.props.current.start), parseDate(this.props.current.end)];
+    const [nextStartDate, nextEndDate] = [parseDate(nextProps.current.start), parseDate(nextProps.current.end)];
+
+    return prevStartDate.getTime() !== nextStartDate.getTime() || prevEndDate.getTime() !== nextEndDate.getTime();
+  }
+
   let shouldUpdate = (nextProps.selected || []).reduce((prev, next, i) => {
     const currentSelected = (this.props.selected || [])[i];
     if (!currentSelected || !next || parseDate(currentSelected).getTime() !== parseDate(next).getTime()) {
@@ -12,7 +19,7 @@ export default function shouldComponentUpdate(nextProps, nextState) {
     return prev;
   }, {update: false});
 
-  shouldUpdate = ['markedDates', 'hideExtraDays', 'displayLoadingIndicator'].reduce((prev, next) => {
+  shouldUpdate = ['markedDates', 'hideExtraDays'].reduce((prev, next) => {
     if (!prev.update && nextProps[next] !== this.props[next]) {
       return {
         update: true,
@@ -46,5 +53,6 @@ export default function shouldComponentUpdate(nextProps, nextState) {
       field: 'current'
     };
   }
+  //console.log(shouldUpdate.field, shouldUpdate.update);
   return shouldUpdate.update;
 }

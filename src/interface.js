@@ -18,21 +18,21 @@ function xdateToData(xdate) {
   };
 }
 
-function parseDate(d) {
+function parseDate(d, utcMode = true) {
   if (!d) {
     return;
   } else if (d.timestamp) { // conventional data timestamp
-    return XDate(d.timestamp, true);
+    return XDate(d.timestamp, utcMode);
   } else if (d instanceof XDate) { // xdate
-    return XDate(d.toString('yyyy-MM-dd'), true);
+    return XDate(d.toString('yyyy-MM-dd'), utcMode);
   } else if (d.getTime) { // javascript date
     const dateString = d.getFullYear() + '-' + padNumber((d.getMonth() + 1)) + '-' + padNumber(d.getDate());
-    return XDate(dateString, true);
+    return XDate(dateString, utcMode);
   } else if (d.year) {
     const dateString = d.year + '-' + padNumber(d.month) + '-' + padNumber(d.day);
-    return XDate(dateString, true);
-  } else if (d) { // timestamp number or date formatted as string
-    return XDate(d, true);
+    return XDate(dateString, utcMode);
+  } else if (d) { // timestamp nuber or date formatted as string
+    return XDate(d, utcMode);
   }
 }
 

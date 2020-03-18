@@ -1,21 +1,20 @@
 import {StyleSheet} from 'react-native';
 import * as defaultStyle from '../../../style';
-
-const STYLESHEET_ID = 'stylesheet.day.period';
-
-const FILLER_HEIGHT = 34;
+import { rem } from '../../../util';
+const FILLER_HEIGHT = rem(34);
 
 export default function styleConstructor(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     wrapper: {
+      flex: 1,
       alignItems: 'center',
       alignSelf: 'stretch',
       marginLeft: -1
     },
     base: {
       //borderWidth: 1,
-      width: 38,
+      width: rem(38),
       height: FILLER_HEIGHT,
       alignItems: 'center'
     },
@@ -35,15 +34,12 @@ export default function styleConstructor(theme={}) {
       flex: 1
     },
     text: {
-      marginTop: 7,
+      marginTop: rem(7),
       fontSize: appStyle.textDayFontSize,
       fontFamily: appStyle.textDayFontFamily,
       fontWeight: '300',
       color: appStyle.dayTextColor || '#2d4150',
       backgroundColor: 'rgba(255, 255, 255, 0)'
-    },
-    today: {
-      backgroundColor: appStyle.todayBackgroundColor
     },
     todayText: {
       fontWeight: '500',
@@ -59,7 +55,7 @@ export default function styleConstructor(theme={}) {
       borderColor: '#c1e4fe'
     },
     quickActionText: {
-      marginTop: 6,
+      marginTop: rem(6),
       color: appStyle.textColor
     },
     firstQuickAction: {
@@ -70,7 +66,6 @@ export default function styleConstructor(theme={}) {
     },
     naText: {
       color: '#b6c1cd'
-    },
-    ...(theme[STYLESHEET_ID] || {})
+    }
   });
 }

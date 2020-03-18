@@ -6,6 +6,19 @@ function sameMonth(a, b) {
     a.getMonth() === b.getMonth();
 }
 
+function between(start, end, current) {
+  return start instanceof XDate && end instanceof XDate && current instanceof XDate &&
+    current.valueOf() >= start.valueOf() && current.valueOf() <= end.valueOf()
+}
+
+function before(a, b) {
+  return a instanceof XDate && b instanceof XDate && a.valueOf() < b.valueOf();
+}
+
+function after(a, b) {
+  return a instanceof XDate && b instanceof XDate && a.valueOf() > b.valueOf();
+}
+
 function sameDate(a, b) {
   return a instanceof XDate && b instanceof XDate &&
     a.getFullYear() === b.getFullYear() &&
@@ -88,5 +101,8 @@ module.exports = {
   page,
   fromTo,
   isLTE,
-  isGTE
+  isGTE,
+  before,
+  after,
+  between
 };

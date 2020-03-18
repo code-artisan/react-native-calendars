@@ -1,11 +1,12 @@
+import { rem } from '../util';
 export default function platformStyles(appStyle) {
   return {
     knob: {
-      width: 38,
-      height: 7,
-      marginTop: 10,
-      borderRadius: 3,
-      backgroundColor: appStyle.agendaKnobColor
+      width: rem(38),
+      height: rem(7),
+      marginTop: rem(10),
+      borderRadius: rem(3),
+      backgroundColor: '#4ac4f7'
     },
     weekdays: {
       position: 'absolute',
@@ -14,10 +15,10 @@ export default function platformStyles(appStyle) {
       top: 0,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      paddingLeft: 24,
-      paddingRight: 24,
-      paddingTop: 15,
-      paddingBottom: 7,
+      paddingLeft: rem(24),
+      paddingRight: rem(24),
+      paddingTop: rem(15),
+      paddingBottom: rem(7),
       backgroundColor: appStyle.calendarBackground
     },
   };

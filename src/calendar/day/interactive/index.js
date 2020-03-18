@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+//import _ from 'lodash';
 import {
   TouchableWithoutFeedback,
   Text,
   View
 } from 'react-native';
-import {shouldUpdate} from '../../../component-updater';
-import isEqual from 'lodash.isequal';
 
 import * as defaultStyle from '../../../style';
 import styleConstructor from './style';
+import { rem } from '../../../util';
 
 class Day extends Component {
   static propTypes = {
@@ -18,11 +18,9 @@ class Day extends Component {
 
     // Specify theme properties to override specific styles for calendar parts. Default = {}
     theme: PropTypes.object,
-    marking: PropTypes.any,
+    marked: PropTypes.any,
 
     onPress: PropTypes.func,
-    onLongPress: PropTypes.func,
-    date: PropTypes.object,
 
     markingExists: PropTypes.bool,
   };
@@ -31,41 +29,31 @@ class Day extends Component {
     super(props);
     this.theme = {...defaultStyle, ...(props.theme || {})};
     this.style = styleConstructor(props.theme);
-    this.markingStyle = this.getDrawingStyle(props.marking || []);
-    this.onDayPress = this.onDayPress.bind(this);
-    this.onDayLongPress = this.onDayLongPress.bind(this);
-  }
-
-  onDayPress() {
-    this.props.onPress(this.props.date);
-  }
-
-  onDayLongPress() {
-    this.props.onLongPress(this.props.date);
+    this.markingStyle = this.getDrawingStyle(props.marked);
   }
 
   shouldComponentUpdate(nextProps) {
-    const newMarkingStyle = this.getDrawingStyle(nextProps.marking);
+    const newMarkingStyle = this.getDrawingStyle(nextProps.marked);
 
-    if (!isEqual(this.markingStyle, newMarkingStyle)) {
+    if (JSON.stringify(this.markingStyle) !== JSON.stringify(newMarkingStyle)) {
       this.markingStyle = newMarkingStyle;
       return true;
     }
 
-    return shouldUpdate(this.props, nextProps, ['state', 'children', 'onPress', 'onLongPress']);
+    return ['state', 'children'].reduce((prev, next) => {
+      if (prev || nextProps[next] !== this.props[next]) {
+        return true;
+      }
+      return prev;
+    }, false);
   }
 
   getDrawingStyle(marking) {
-    const defaultStyle = {textStyle: {}};
     if (!marking) {
-      return defaultStyle;
+      return {};
     }
-    if (marking.disabled) {
-      defaultStyle.textStyle.color = this.theme.textDisabledColor;
-    } else if (marking.selected) {
-      defaultStyle.textStyle.color = this.theme.selectedDayTextColor;
-    }
-    const resultStyle = ([marking]).reduce((prev, next) => {
+    return marking.reduce((prev, next) => {
+      prev.textStyle = {};
       if (next.quickAction) {
         if (next.first || next.last) {
           prev.containerStyle = this.style.firstQuickAction;
@@ -108,8 +96,7 @@ class Day extends Component {
         prev.textStyle.color = next.textColor;
       }
       return prev;
-    }, defaultStyle);
-    return resultStyle;
+    }, {});
   }
 
   render() {
@@ -117,19 +104,17 @@ class Day extends Component {
     const textStyle = [this.style.text];
     let leftFillerStyle = {};
     let rightFillerStyle = {};
-    let fillerStyle = {};
     let fillers;
 
     if (this.props.state === 'disabled') {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
-      containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
     }
 
-    if (this.props.marking) {
+    if (this.props.marked) {
       containerStyle.push({
-        borderRadius: 17
+        borderRadius: rem(17)
       });
 
       const flags = this.markingStyle;
@@ -169,8 +154,6 @@ class Day extends Component {
       } else if (flags.day) {
         leftFillerStyle = {backgroundColor: flags.day.color};
         rightFillerStyle = {backgroundColor: flags.day.color};
-        // #177 bug
-        fillerStyle = {backgroundColor: flags.day.color};
       } else if (flags.endingDay && flags.startingDay) {
         rightFillerStyle = {
           backgroundColor: this.theme.calendarBackground
@@ -184,7 +167,7 @@ class Day extends Component {
       }
 
       fillers = (
-        <View style={[this.style.fillers, fillerStyle]}>
+        <View style={this.style.fillers}>
           <View style={[this.style.leftFiller, leftFillerStyle]}/>
           <View style={[this.style.rightFiller, rightFillerStyle]}/>
         </View>
@@ -192,13 +175,11 @@ class Day extends Component {
     }
 
     return (
-      <TouchableWithoutFeedback
-        onPress={this.onDayPress}
-        onLongPress={this.onDayLongPress}>
+      <TouchableWithoutFeedback onPress={this.props.onPress}>
         <View style={this.style.wrapper}>
           {fillers}
           <View style={containerStyle}>
-            <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
+            <Text style={textStyle}>{String(this.props.children)}</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>
