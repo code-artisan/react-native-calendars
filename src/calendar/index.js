@@ -200,7 +200,7 @@ class Calendar extends React.Component {
     const _minDate = parseDate(minDate);
     const _maxDate = parseDate(maxDate);
 
-    // this.setState(isMultiSelect ? this.getMultipleSelectedState(day) : this.getSingleSelectedState(day))
+    this.setState(isMultiSelect ? this.getMultipleSelectedState(day) : this.getSingleSelectedState(day));
 
     if (!(_minDate && !dateutils.isGTE(day, _minDate)) && !(_maxDate && !dateutils.isLTE(day, _maxDate))) {
       const shouldUpdateMonth = disableMonthChange === undefined || !disableMonthChange;
@@ -333,7 +333,6 @@ class Calendar extends React.Component {
   }
 
   render() {
-    console.log('=------------------->', this.state.selectedDate);
     const days = dateutils.page(this.state.currentMonth, this.props.firstDay);
 
     const weeks = [];
