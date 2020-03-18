@@ -1,11 +1,9 @@
+import XDate from 'xdate'
 import {parseDate} from '../interface';
 
 export default function shouldComponentUpdate(nextProps, nextState) {
   if (nextProps.isMultiSelect) {
-    const [prevStartDate, prevEndDate] = [parseDate(this.props.current.start), parseDate(this.props.current.end)];
-    const [nextStartDate, nextEndDate] = [parseDate(nextProps.current.start), parseDate(nextProps.current.end)];
-
-    return prevStartDate.getTime() !== nextStartDate.getTime() || prevEndDate.getTime() !== nextEndDate.getTime();
+    return true
   }
 
   let shouldUpdate = (nextProps.selected || []).reduce((prev, next, i) => {
@@ -53,6 +51,7 @@ export default function shouldComponentUpdate(nextProps, nextState) {
       field: 'current'
     };
   }
+
   //console.log(shouldUpdate.field, shouldUpdate.update);
   return shouldUpdate.update;
 }

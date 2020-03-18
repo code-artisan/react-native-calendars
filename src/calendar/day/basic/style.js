@@ -40,6 +40,14 @@ export default function styleConstructor(theme={}) {
     todayText: {
       color: appStyle.todayTextColor,
       alignItems: 'center',
+      fontWeight: 'bold',
+    },
+    selectedCircle: {
+      width: SIZE,
+      height: SIZE,
+      backgroundColor: appStyle.selectedDayBackgroundColor,
+      borderRadius: SIZE / 2,
+      color: appStyle.selectedDayTextColor
     },
     selectedHead: {
       width: '100%',

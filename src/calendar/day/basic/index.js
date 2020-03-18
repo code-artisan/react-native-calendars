@@ -12,7 +12,7 @@ import styleConstructor from './style';
 class Day extends Component {
   static propTypes = {
     // TODO: disabled props should be removed
-    state: PropTypes.oneOf(['disabled', 'selected-head', 'selected-tail', 'selected', 'today', '']),
+    state: PropTypes.oneOf(['disabled', 'selected-circle', 'selected-head', 'selected-tail', 'selected', 'today', '']),
 
     // Specify theme properties to override specific styles for calendar parts. Default = {}
     theme: PropTypes.object,
@@ -76,13 +76,16 @@ class Day extends Component {
     } else if (this.props.state === 'selected') {
       containerStyle.push(this.style.selected);
       containerStyle.push(this.style.block);
-      textStyle.push(this.style.todayText);
+      textStyle.push(this.style.selectedText);
     } else if (this.props.state === 'selected-head') {
       containerStyle.push(this.style.selectedHead);
-      textStyle.push(this.style.todayText);
+      textStyle.push(this.style.selectedText);
     } else if (this.props.state === 'selected-tail') {
       containerStyle.push(this.style.selectedTail);
-      textStyle.push(this.style.todayText);
+      textStyle.push(this.style.selectedText);
+    } else if (this.props.state === 'selected-circle') {
+      containerStyle.push(this.style.selectedCircle);
+      textStyle.push(this.style.selectedText);
     }
 
     return (

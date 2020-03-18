@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
   ViewPropTypes
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-import XDate from 'xdate';
+import XDate, { parse } from 'xdate';
 import dateutils from '../dateutils';
 import {xdateToData, parseDate} from '../interface';
 import styleConstructor from './style';
@@ -18,35 +18,35 @@ import CalendarHeader from './header';
 import shouldComponentUpdate from './updater';
 
 const getSelectedDateState = (current, isMultiSelect) => {
-  let [start, end] = [];
+  let [start, end] = []
 
   if (!current) {
     return {
       start: new XDate()
-    };
+    }
   }
 
   if (isMultiSelect) {
-    start = parseDate(current.start, false);
-    end = parseDate(current.end, false);
+    start = parseDate(current.start, false)
+    end = parseDate(current.end, false)
   } else {
-    start = parseDate(current, false);
-    end = parseDate(current, false);
+    start = parseDate(current, false)
+    end = parseDate(current, false)
   }
 
   if (start > end) {
-    [start, end] = [end, start];
+    [start, end] = [end, start]
   }
 
-  return {start, end};
-};
+  return { start, end }
+}
 
 //Fallback when RN version is < 0.44
 const viewPropTypes = ViewPropTypes || View.propTypes;
 
 const EmptyArray = [];
 
-class Calendar extends React.Component {
+class Calendar extends Component {
   static propTypes = {
     isMultiSelect: PropTypes.bool,
 
@@ -116,7 +116,7 @@ class Calendar extends React.Component {
 
     this.state = {
       currentMonth,
-      selectedDate: getSelectedDateState(props.current, props.isMultiSelect)
+      selectedDate: getSelectedDateState(props.current, props.isMultiSelect),
     };
   }
 
@@ -127,13 +127,13 @@ class Calendar extends React.Component {
 
     let newState = {
       selectedDate: getSelectedDateState(props.current, props.isMultiSelect)
-    };
-
-    if (current && current.toString('yyyy MM') !== state.currentMonth.toString('yyyy MM')) {
-      newState.currentMonth = current.clone();
     }
 
-    return newState;
+    if (current && current.toString('yyyy MM') !== state.currentMonth.toString('yyyy MM')) {
+      newState.currentMonth = current.clone()
+    }
+
+    return newState
   }
 
   updateMonth = (day, doNotTriggerListeners) => {
@@ -160,47 +160,47 @@ class Calendar extends React.Component {
     const stateValue = {
       start,
       end: start
-    };
-
-    if (typeof end !== 'undefined') {
-      stateValue.end = end;
     }
 
-    return stateValue;
+    if (typeof end !== 'undefined') {
+      stateValue.end = end
+    }
+
+    return stateValue
   }
 
   getSingleSelectedState = (value) => {
     return {
       selectedDate: getSelectedDateState(value.valueOf())
-    };
+    }
   }
 
   getMultipleSelectedState = (value) => {
-    const {selectedDate} = this.state;
-    const {start, end} = selectedDate;
+    const { selectedDate } = this.state
+    const { start, end } = selectedDate
 
-    const valueUnix = value.valueOf();
+    const valueUnix = value.valueOf()
     const state = {
       selectedDate
-    };
-
-    if (end) {
-      state.selectedDate = this.getSelectedDate(valueUnix, 0);
-    } else {
-      state.selectedDate.end = Math.max(valueUnix, +start);
-      state.selectedDate.start = Math.min(valueUnix, +start);
     }
 
-    return state;
+    if (end) {
+      state.selectedDate = this.getSelectedDate(valueUnix, 0)
+    } else {
+      state.selectedDate.end = Math.max(valueUnix, +start)
+      state.selectedDate.start = Math.min(valueUnix, +start)
+    }
+
+    return state
   }
 
   _handleDayInteraction(date, interaction) {
-    const {minDate, maxDate, isMultiSelect, disableMonthChange} = this.props;
+    const { minDate, maxDate, isMultiSelect, disableMonthChange } = this.props;
     const day = parseDate(date);
     const _minDate = parseDate(minDate);
     const _maxDate = parseDate(maxDate);
 
-    this.setState(isMultiSelect ? this.getMultipleSelectedState(day) : this.getSingleSelectedState(day));
+    this.setState(isMultiSelect ? this.getMultipleSelectedState(day) : this.getSingleSelectedState(day))
 
     if (!(_minDate && !dateutils.isGTE(day, _minDate)) && !(_maxDate && !dateutils.isLTE(day, _maxDate))) {
       const shouldUpdateMonth = disableMonthChange === undefined || !disableMonthChange;
@@ -238,11 +238,11 @@ class Calendar extends React.Component {
     } else if (!dateutils.sameMonth(day, this.state.currentMonth)) {
       state = 'disabled';
     } else if (this.props.isMultiSelect) {
-      const {selectedDate} = this.state;
-      const isSameDateOfStartAndEnd = dateutils.sameDate(selectedDate.start, selectedDate.end);
+      const { selectedDate } = this.state
+      const isSameDateOfStartAndEnd = dateutils.sameDate(selectedDate.start, selectedDate.end)
 
       if (isSameDateOfStartAndEnd && dateutils.sameDate(day, selectedDate.start)) {
-        state = 'today';
+        state = 'selected-circle';
       } else if (dateutils.sameDate(day, selectedDate.start)) {
         state = 'selected-head';
       } else if (dateutils.sameDate(day, selectedDate.end)) {
