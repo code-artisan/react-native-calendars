@@ -8,7 +8,7 @@ function sameMonth(a, b) {
 
 function between(start, end, current) {
   return start instanceof XDate && end instanceof XDate && current instanceof XDate &&
-    current.valueOf() >= start.valueOf() && current.valueOf() <= end.valueOf()
+    current.valueOf() >= start.valueOf() && current.valueOf() <= end.valueOf();
 }
 
 function before(a, b) {

@@ -1,5 +1,5 @@
 {
-  "name": "react-native-calendars",
+  "name": "rnmc-calendar",
   "version": "1.22.0",
   "main": "src/index.js",
   "description": "React Native Calendar Components",
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wix/react-native-calendars"
+    "url": "git+https://github.com/code-artisan/rnmc-calendar"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "author": "Wix.com",
+  "author": "artisan",
   "license": "MIT",
   "dependencies": {
     "@terminus/mp-calendar": "^1.0.0",

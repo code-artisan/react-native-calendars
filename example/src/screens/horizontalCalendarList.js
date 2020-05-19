@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import {CalendarList} from 'react-native-calendars';
+import {CalendarList} from 'rnmc-calendar';
 
 
 export default class HorizontalCalendarList extends Component {

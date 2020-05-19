@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {CalendarList} from 'react-native-calendars';
+import {CalendarList} from 'rnmc-calendar';
 
 
 export default class CalendarsList extends Component {
