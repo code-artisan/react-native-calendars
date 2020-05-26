@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import {shouldUpdate} from '../../../component-updater';
-import isEqual from 'lodash/isequal';
+import isEqual from 'lodash/isEqual';
 
 import * as defaultStyle from '../../../style';
 import styleConstructor from './style';

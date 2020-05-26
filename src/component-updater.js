@@ -1,5 +1,5 @@
 const get = require('lodash/get');
-const isEqual = require('lodash/isequal');
+const isEqual = require('lodash/isEqual');
 
 function shouldUpdate(a, b, paths) {
   for (let i = 0; i < paths.length; i++) {
