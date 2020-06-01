@@ -3,8 +3,7 @@ import {
   Text,
   View,
   Dimensions,
-  Animated,
-  ViewPropTypes,
+  Animated
 } from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
@@ -14,13 +13,13 @@ import dateutils from '../dateutils';
 import CalendarList from '../calendar-list';
 import ReservationsList from './reservation-list';
 import styleConstructor from './style';
-import { VelocityTracker } from '../input';
+import {VelocityTracker} from '../input';
 
 const HEADER_HEIGHT = 104;
 const KNOB_HEIGHT = 24;
 
 //Fallback when RN version is < 0.44
-const viewPropTypes = ViewPropTypes || View.propTypes;
+// const viewPropTypes = ViewPropTypes || View.propTypes;
 
 export default class AgendaView extends Component {
   static propTypes = {
@@ -28,7 +27,7 @@ export default class AgendaView extends Component {
     theme: PropTypes.object,
 
     // agenda container style
-    style: viewPropTypes.style,
+    style: PropTypes.any,
 
     // the list of items that have to be displayed in agenda. If you want to render item as empty date
     // the value of date key has to be an empty array []. If there exists no value for date key it is
