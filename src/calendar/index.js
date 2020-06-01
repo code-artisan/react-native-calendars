@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  ViewPropTypes
-} from 'react-native';
+import {View} from 'react-native';
 import PropTypes from 'prop-types';
 
 import XDate from 'xdate';
@@ -42,7 +39,7 @@ const getSelectedDateState = (current, isMultiSelect) => {
 };
 
 //Fallback when RN version is < 0.44
-const viewPropTypes = ViewPropTypes || View.propTypes;
+// const viewPropTypes = ViewPropTypes || View.propTypes;
 
 const EmptyArray = [];
 
@@ -56,7 +53,7 @@ class Calendar extends Component {
     markedDates: PropTypes.object,
 
     // Specify style for calendar container element. Default = {}
-    style: viewPropTypes.style,
+    style: PropTypes.any,
     // Initially visible month. Default = Date()
     current: PropTypes.any,
     // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
