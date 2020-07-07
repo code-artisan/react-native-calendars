@@ -105,7 +105,10 @@ class Calendar extends Component {
     super(props);
     this.style = styleConstructor(this.props.theme);
     let currentMonth;
-    if (props.current) {
+
+    if (props.isMultiSelect) {
+      currentMonth = parseDate(props.current.start)
+    } else if (props.current) {
       currentMonth = parseDate(props.current);
     } else {
       currentMonth = XDate();

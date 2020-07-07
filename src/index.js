@@ -1,7 +1,7 @@
-export {default as Calendar} from './calendar';
-export {default as CalendarList} from './calendar-list';
-export {default as Agenda} from './agenda';
-import {default as LocaleConfig} from 'xdate';
+export { default as Calendar } from './calendar';
+export { default as CalendarList } from './calendar-list';
+export { default as Agenda } from './agenda';
+import { default as LocaleConfig } from 'xdate';
 
 LocaleConfig.locales['zh-cn'] = {
   monthNames: [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
@@ -12,4 +12,4 @@ LocaleConfig.locales['zh-cn'] = {
 
 LocaleConfig.defaultLocale = 'zh-cn';
 
-export {LocaleConfig};
+export { LocaleConfig };

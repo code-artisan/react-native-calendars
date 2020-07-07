@@ -24,6 +24,8 @@ export default function(theme={}) {
       padding: 10
     },
     arrowImage: {
+      width: 20,
+      height: 20,
       ...Platform.select({
         ios: {
           tintColor: appStyle.arrowColor
