@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import XDate from 'xdate';
 import dateutils from '../dateutils';
-import {parseDate} from '../interface';
+import {xdateToData, parseDate} from '../interface';
 import styleConstructor from './style';
 import Day from './day/basic';
 import UnitDay from './day/period';
@@ -266,7 +266,7 @@ class Calendar extends Component {
           onPress={this.pressDay}
           dayRenderer={this.props.dayRenderer}
           onLongPress={this.longPressDay}
-          date={day.toString('YYYY-MM-DD')}
+          date={xdateToData(day)}
           marking={this.getDateMarking(day)}
         >
           {date}
