@@ -64,7 +64,7 @@ class Day extends Component {
     if (marking.selected) {
       containerStyle.push(this.style.selected);
       if (marking.selectedColor) {
-        containerStyle.push({ backgroundColor: marking.selectedColor });
+        containerStyle.push({backgroundColor: marking.selectedColor});
       }
       dotStyle.push(this.style.selectedDot);
       textStyle.push(this.style.selectedText);
@@ -89,7 +89,7 @@ class Day extends Component {
     }
 
     return (
-      <View style={{ width: '100%', display: 'flex' }}>
+      <View style={{width: '100%', display: 'flex'}}>
         <TouchableOpacity
           style={containerStyle}
           onPress={this.onDayPress}
@@ -97,17 +97,19 @@ class Day extends Component {
           activeOpacity={marking.activeOpacity}
           disabled={marking.disableTouchEvent}
         >
-          {this.props.dayRenderer ? (
-          this.props.dayRenderer ({
-              textStyle,
-              text: String(marking.dayText || this.props.children),
-              ...marking,
-            })
-          ) : (
-            <Text allowFontScaling={false} style={textStyle}>
-              {String(marking.dayText || this.props.children)}
-            </Text>
-          )}
+          {
+            this.props.dayRenderer ? (
+              this.props.dayRenderer ({
+                textStyle,
+                text: String(marking.dayText || this.props.children),
+                ...marking
+              })
+            ) : (
+              <Text allowFontScaling={false} style={textStyle}>
+                {String(marking.dayText || this.props.children)}
+              </Text>
+            )
+          }
           {dot}
         </TouchableOpacity>
       </View>

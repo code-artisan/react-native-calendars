@@ -14,12 +14,6 @@ export default function getStyle(theme = {}) {
     monthView: {
       backgroundColor: appStyle.calendarBackground
     },
-    week: {
-      marginTop: 7,
-      marginBottom: 7,
-      flexDirection: 'row',
-    },
     ...(theme[STYLESHEET_ID] || {})
   });
 }
-

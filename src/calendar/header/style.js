@@ -13,15 +13,30 @@ export default function(theme={}) {
       paddingRight: 10,
       alignItems: 'center'
     },
+    yearText: {
+      fontSize: appStyle.textMonthFontSize,
+      fontFamily: appStyle.textMonthFontFamily,
+      fontWeight: appStyle.textMonthFontWeight,
+      color: appStyle.monthTextColor,
+      marginTop: 10,
+      marginBottom: 10,
+      marginRight: 10
+    },
     monthText: {
       fontSize: appStyle.textMonthFontSize,
       fontFamily: appStyle.textMonthFontFamily,
       fontWeight: appStyle.textMonthFontWeight,
       color: appStyle.monthTextColor,
-      margin: 10
+      marginTop: 10,
+      marginBottom: 10
     },
     arrow: {
-      padding: 10
+      marginVertical: 10,
+      marginRight: 12
+    },
+    arrows: {
+      flexDirection: 'row',
+      paddingLeft: 10
     },
     arrowImage: {
       width: 20,
@@ -34,20 +49,6 @@ export default function(theme={}) {
           tintColor: appStyle.arrowColor
         }
       })
-    },
-    week: {
-      marginTop: 7,
-      flexDirection: 'row',
-      justifyContent: 'space-around'
-    },
-    dayHeader: {
-      marginTop: 2,
-      marginBottom: 7,
-      width: 32,
-      textAlign: 'center',
-      fontSize: appStyle.textDayHeaderFontSize,
-      fontFamily: appStyle.textDayHeaderFontFamily,
-      color: appStyle.textSectionTitleColor
     },
     ...(theme[STYLESHEET_ID] || {})
   });

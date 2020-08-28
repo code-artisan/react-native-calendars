@@ -3,7 +3,7 @@ import * as defaultStyle from '../../../style';
 
 const STYLESHEET_ID = 'stylesheet.day.basic';
 
-const SIZE = 32
+const SIZE = 32;
 
 export default function styleConstructor(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
@@ -13,9 +13,12 @@ export default function styleConstructor(theme={}) {
       alignSelf: 'center',
       height: SIZE,
       alignItems: 'center',
-      borderRadius: SIZE / 2,
+      justifyContent: 'center',
+      borderRadius: SIZE / 2
     },
     text: {
+      // width: SIZE,
+      // height: SIZE,
       marginTop: Platform.OS === 'android' ? 4 : 6,
       fontSize: appStyle.textDayFontSize,
       fontFamily: appStyle.textDayFontFamily,
@@ -31,16 +34,18 @@ export default function styleConstructor(theme={}) {
       borderRadius: 0
     },
     selected: {
-      backgroundColor: appStyle.selectedDayBackgroundColor,
+      backgroundColor: appStyle.selectedDayBackgroundColor
     },
     today: {
-      width: SIZE,
-      backgroundColor: appStyle.todayBackgroundColor,
+      backgroundColor: appStyle.todayBackgroundColor
     },
     todayText: {
       color: appStyle.todayTextColor,
-      alignItems: 'center',
-      fontWeight: 'bold',
+      alignItems: 'center'
+      // borderRadius: SIZE,
+      // borderWidth: 1,
+      // borderColor: '#ff0000',
+      // fontWeight: 'bold'
     },
     selectedCircle: {
       width: SIZE,
@@ -53,13 +58,13 @@ export default function styleConstructor(theme={}) {
       width: '100%',
       backgroundColor: appStyle.selectedDayBackgroundColor,
       borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
+      borderBottomRightRadius: 0
     },
     selectedTail: {
       width: '100%',
       backgroundColor: appStyle.selectedDayBackgroundColor,
       borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0,
+      borderBottomLeftRadius: 0
     },
     selectedText: {
       color: appStyle.selectedDayTextColor

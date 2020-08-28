@@ -26,7 +26,7 @@ Navigation.events().registerAppLaunchedListener(() => {
         children: [
           {
             component: {
-              name: 'Menu',
+              name: 'Calendars',
               options: {
                 topBar: {
                   title: {

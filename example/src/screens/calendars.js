@@ -24,16 +24,16 @@ export default class CalendarsScreen extends Component {
           style={styles.calendar}
           hideExtraDays
           onDayPress={this.onDayPress}
-          markedDates={{
-            [this.state.selected]: {
-              selected: true, 
-              disableTouchEvent: true, 
-              selectedDotColor: 'orange'
-            }
-          }}
+          // markedDates={{
+          //   [this.state.selected]: {
+          //     selected: true, 
+          //     disableTouchEvent: true, 
+          //     selectedDotColor: 'orange'
+          //   }
+          // }}
         />
 
-        <Text style={styles.text}>Calendar with week numbers</Text>
+        {/* <Text style={styles.text}>Calendar with week numbers</Text>
         <Calendar
           style={styles.calendar}
           hideExtraDays
@@ -260,7 +260,7 @@ export default class CalendarsScreen extends Component {
               </View>
             );
           }}
-        />
+        /> */}
       </ScrollView>
     );
   }

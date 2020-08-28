@@ -7,7 +7,7 @@
     "test": "jasmine src/*.spec.js && npm run lint",
     "lint": "eslint src/ example/src",
     "release": "node ./scripts/release.js",
-    "start": "react-native start",
+    "start": "react-native start --reset-cache",
     "ios": "react-native run-ios",
     "android": "react-native run-android",
     "xcode": "open ios/CalendarsExample.xcworkspace/"
@@ -26,6 +26,7 @@
     "hoist-non-react-statics": "^3.3.1",
     "lodash": "^4.0.0",
     "prop-types": "^15.5.10",
+    "react-native-svg": "^12.1.0",
     "xdate": "^0.8.0"
   },
   "devDependencies": {
@@ -35,7 +36,7 @@
     "jasmine": "^2.5.2",
     "react": "16.9.0",
     "react-native": "0.61.4",
-    "react-native-navigation": "^3.5.1",
+    "react-native-navigation": "^3.7.0",
     "semver": "5.x.x",
     "shell-utils": "1.x.x"
   }

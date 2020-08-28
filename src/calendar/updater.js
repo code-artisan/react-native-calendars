@@ -1,9 +1,9 @@
-import XDate from 'xdate'
+// import XDate from 'xdate';
 import {parseDate} from '../interface';
 
 export default function shouldComponentUpdate(nextProps, nextState) {
   if (nextProps.isMultiSelect) {
-    return true
+    return true;
   }
 
   let shouldUpdate = (nextProps.selected || []).reduce((prev, next, i) => {
@@ -45,13 +45,26 @@ export default function shouldComponentUpdate(nextProps, nextState) {
     return prev;
   }, shouldUpdate);
 
-  if (nextState.currentMonth !== this.state.currentMonth) {
+  if (nextState.mode !== this.state.mode) {
     shouldUpdate = {
       update: true,
       field: 'current'
     };
   }
 
-  //console.log(shouldUpdate.field, shouldUpdate.update);
+  if (nextState.min !== this.state.min || nextState.max !== this.state.max) {
+    shouldUpdate = {
+      update: true,
+      field: 'current'
+    };
+  }
+
+  if (nextState.year !== this.state.year || nextState.month !== this.state.month) {
+    shouldUpdate = {
+      update: true,
+      field: 'current'
+    };
+  }
+
   return shouldUpdate.update;
 }
