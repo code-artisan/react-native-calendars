@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import XDate from 'xdate';
 import dateutils from '../dateutils';
-import {xdateToData, parseDate} from '../interface';
+import {parseDate} from '../interface';
 import styleConstructor from './style';
 import Day from './day/basic';
 import UnitDay from './day/period';
@@ -107,7 +107,7 @@ class Calendar extends Component {
     let currentMonth;
 
     if (props.isMultiSelect) {
-      currentMonth = parseDate(props.current.start)
+      currentMonth = parseDate(props.current.start);
     } else if (props.current) {
       currentMonth = parseDate(props.current);
     } else {
@@ -139,11 +139,11 @@ class Calendar extends Component {
       if (!doNotTriggerListeners) {
         const currMont = this.state.currentMonth.clone();
         if (this.props.onMonthChange) {
-          this.props.onMonthChange(xdateToData(currMont));
+          this.props.onMonthChange(currMont.toString('YYYY-MM'));
         }
 
         if (this.props.onVisibleMonthsChange) {
-          this.props.onVisibleMonthsChange([xdateToData(currMont)]);
+          this.props.onVisibleMonthsChange([currMont.toString('YYYY-MM')]);
         }
       }
     });
@@ -202,7 +202,7 @@ class Calendar extends Component {
       }
 
       if (interaction) {
-        interaction(xdateToData(day));
+        interaction(day.toString('YYYY-MM-DD'));
       }
     }
   }
@@ -266,7 +266,7 @@ class Calendar extends Component {
           onPress={this.pressDay}
           dayRenderer={this.props.dayRenderer}
           onLongPress={this.longPressDay}
-          date={xdateToData(day)}
+          date={day.toString('YYYY-MM-DD')}
           marking={this.getDateMarking(day)}
         >
           {date}
