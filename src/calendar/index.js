@@ -202,7 +202,7 @@ class Calendar extends Component {
       }
 
       if (interaction) {
-        interaction(day.toString('YYYY-MM-DD'));
+        interaction(date.dateString);
       }
     }
   }
