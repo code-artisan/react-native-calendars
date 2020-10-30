@@ -1,15 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   TouchableOpacity,
+  TouchableWithoutFeedBack,
   Text,
-  View
+  View,
+  Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {shouldUpdate} from '../../../component-updater';
 
 import styleConstructor from './style';
 
-class Day extends Component {
+const isNativeOrWeb = Platform.OS === 'ios' || Platform.OS === 'android' || Platform.OS === 'web'
+
+class Day extends React.Component {
   static propTypes = {
     // TODO: disabled props should be removed
     state: PropTypes.oneOf(['disabled', 'selected-circle', 'selected-head', 'selected-tail', 'selected', 'today', '']),
@@ -38,6 +42,27 @@ class Day extends Component {
 
   shouldComponentUpdate(nextProps) {
     return shouldUpdate(this.props, nextProps, ['state', 'children', 'marking', 'onPress', 'onLongPress']);
+  }
+
+  getDayView = (dot, marking, textStyle) => {
+    return (
+      <>
+        {
+          this.props.dayRenderer ? (
+            this.props.dayRenderer({
+              textStyle,
+              text: String(marking.dayText || this.props.children),
+              ...marking,
+            })
+          ) : (
+            <Text allowFontScaling={false} style={textStyle}>
+              {String(marking.dayText || this.props.children)}
+            </Text>
+          )
+        }
+        {dot}
+      </>
+    )
   }
 
   render() {
@@ -90,26 +115,32 @@ class Day extends Component {
 
     return (
       <View style={{ width: '100%', display: 'flex' }}>
-        <TouchableOpacity
-          style={containerStyle}
-          onPress={this.onDayPress}
-          onLongPress={this.onDayLongPress}
-          activeOpacity={marking.activeOpacity}
-          disabled={marking.disableTouchEvent}
-        >
-          {this.props.dayRenderer ? (
-          this.props.dayRenderer ({
-              textStyle,
-              text: String(marking.dayText || this.props.children),
-              ...marking,
-            })
+        {
+          isNativeOrWeb ? (
+            <TouchableOpacity
+              style={containerStyle}
+              onPress={this.onDayPress}
+              onLongPress={this.onDayLongPress}
+              activeOpacity={marking.activeOpacity}
+              disabled={marking.disableTouchEvent}
+            >
+              {
+                this.getDayView(dot, marking, textStyle)
+              }
+            </TouchableOpacity>
           ) : (
-            <Text allowFontScaling={false} style={textStyle}>
-              {String(marking.dayText || this.props.children)}
-            </Text>
-          )}
-          {dot}
-        </TouchableOpacity>
+            <TouchableWithoutFeedBack
+              style={containerStyle}
+              onPress={this.onDayPress}
+              onLongPress={this.onDayLongPress}
+              disabled={marking.disableTouchEvent}
+            >
+              {
+                this.getDayView(dot, marking, textStyle)
+              }
+            </TouchableWithoutFeedBack>
+          )
+        }
       </View>
     );
   }
