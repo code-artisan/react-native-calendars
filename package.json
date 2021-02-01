@@ -1,7 +1,7 @@
 {
   "name": "rnmc-calendar",
   "version": "2.1.0",
-  "main": "src/index.js",
+  "main": "src/index.tsx",
   "description": "React Native Calendar Components",
   "scripts": {
     "test": "jasmine src/*.spec.js && npm run lint",
