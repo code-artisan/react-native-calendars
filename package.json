@@ -1,6 +1,6 @@
 {
   "name": "rnmc-calendar",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "main": "src/index.tsx",
   "description": "React Native Calendar Components",
   "scripts": {
