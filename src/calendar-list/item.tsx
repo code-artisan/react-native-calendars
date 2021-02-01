@@ -9,6 +9,8 @@ class CalendarListItem extends Component {
     hideExtraDays: true,
   };
 
+  style: any;
+
   constructor(props) {
     super(props);
     this.style = styleConstructor(props.theme);
