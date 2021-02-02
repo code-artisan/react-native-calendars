@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   TouchableOpacity,
-  TouchableWithoutFeedBack,
+  TouchableWithoutFeedback,
   Text,
   View,
   Platform,
@@ -129,7 +129,7 @@ class Day extends React.Component {
               }
             </TouchableOpacity>
           ) : (
-            <TouchableWithoutFeedBack
+            <TouchableWithoutFeedback
               style={containerStyle}
               onPress={this.onDayPress}
               onLongPress={this.onDayLongPress}
@@ -138,7 +138,7 @@ class Day extends React.Component {
               {
                 this.getDayView(dot, marking, textStyle)
               }
-            </TouchableWithoutFeedBack>
+            </TouchableWithoutFeedback>
           )
         }
       </View>
